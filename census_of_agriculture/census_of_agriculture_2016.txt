@@ -1,0 +1,9 @@
+# https://open.canada.ca/data/en/dataset/b944bd53-49e5-4a80-83e5-1048d3abf38d
+
+# Download variables descriptions
+https://ftp.maps.canada.ca/pub/statcan_statcan/Agriculture_Agriculture/census_of_agriculture-recensement_agriculture/2016/CEAG16_VariablesDescriptions_REAG16_EN_FR.xlsx
+https://ftp.maps.canada.ca/pub/statcan_statcan/Agriculture_Agriculture/census_of_agriculture-recensement_agriculture/2016/CEAG16_AgriculturalOperations_ExploitationsAgricoles_REAG16.gdb.zip
+https://ftp.maps.canada.ca/pub/statcan_statcan/Agriculture_Agriculture/census_of_agriculture-recensement_agriculture/2016/CEAG16_Crops_Cultures_REAG16.gdb.zip
+https://ftp.maps.canada.ca/pub/statcan_statcan/Agriculture_Agriculture/census_of_agriculture-recensement_agriculture/2016/CEAG16_FarmOperators_ExploitantsAgricoles_REAG16.gdb.zip
+https://ftp.maps.canada.ca/pub/statcan_statcan/Agriculture_Agriculture/census_of_agriculture-recensement_agriculture/2016/CEAG16_LivestockPoultryBees_BetailVolailleAbeilles_REAG16.gdb.zip
+https://ftp.maps.canada.ca/pub/statcan_statcan/Agriculture_Agriculture/census_of_agriculture-recensement_agriculture/2016/CEAG16_UseTenurePractices_UtilisationOccupationPratiques_REAG16.gdb.zip

@@ -1,0 +1,10 @@
+# 2021. Here is the reference guide https://web.archive.org/web/20240809014903/https://www150.statcan.gc.ca/n1/pub/92-150-g/92-150-g2021001-eng.htm
+https://www12.statcan.gc.ca/census-recensement/2021/geo/aip-pia/geosuite/files-fichiers/2021_92-150-X_eng.zip
+# 2016. Here is the reference guide https://web.archive.org/web/20250115043056/https://www150.statcan.gc.ca/n1/pub/92-150-g/92-150-g2016002-eng.htm
+https://www12.statcan.gc.ca/census-recensement/2016/geo/ref/geosuite/files-fichiers/GeoSuite_2016_92-150_XBB_eng.zip
+# 2011. Here is the reference guide https://www150.statcan.gc.ca/n1/pub/92-150-g/92-150-g2011001-eng.htm
+https://www12.statcan.gc.ca/census-recensement/2011/geo/ref/files-fichiers/2011_92-150_XBB_eng.zip
+# 2006. Here is the reference guide 
+https://www12.statcan.gc.ca/census-recensement/2011/geo/ref/files-fichiers/2006_92-150_XBB_eng.zip
+# 2001. Here is the reference guide
+https://www12.statcan.gc.ca/census-recensement/2011/geo/ref/files-fichiers/92F0150WCB2001000.zip

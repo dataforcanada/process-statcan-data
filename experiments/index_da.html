@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Add a vector tile source</title>
+    <meta property="og:description" content="Add a vector source to a map." />
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='https://unpkg.com/maplibre-gl@5.2.0/dist/maplibre-gl.css' />
+    <script src='https://unpkg.com/maplibre-gl@5.2.0/dist/maplibre-gl.js'></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body,
+        #map {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        const map = new maplibregl.Map({
+            container: 'map',
+            style:
+                'https://api.maptiler.com/maps/streets/style.json?key=xBjamUQUPDqLGNMjqo53',
+            zoom: 10,
+            center: [-79.3064, 43.7306],
+            hash: true,
+            maxZoom: 18
+        });
+        map.on('style.load', () => {
+            map.setProjection({
+                type: 'globe', // Set projection to globe
+            });
+        });
+        // This is the metadata http://192.168.0.131:3000/test_da
+        map.on('load', () => {
+            map.addSource('my-vector-tiles', {
+                type: 'vector',
+                tiles: ['http://192.168.0.131:3000/test_da/{z}/{x}/{y}'],
+                minzoom: 10,
+                maxzoom: 14
+            });
+
+            map.addLayer({
+                'id': 'my-layer',
+                'type': 'fill',
+                'source': 'my-vector-tiles',
+                'source-layer': 'test_da', // This must match the layer name in Martin
+                'paint': {
+                    "fill-outline-color": "#000",
+                    "fill-antialias": true,
+                    'fill-color': [
+                        'interpolate', ['linear'], ['get', 'count_total_1'],
+                        0, '#ffffff',
+                        200, '#ffbfbf',
+                        400, '#ff8080',
+                        600, '#ff4040',
+                        800, '#ff0000'
+                    ],
+                    'fill-opacity': 0.7,
+                },
+                //filter: ["==", "dguid", ""], // Initially empty filter
+            });
+        });
+
+        map.on('click', 'my-layer', (e) => {
+            // Check if any features were clicked
+            if (e.features.length > 0) {
+                // Retrieve the first clicked feature
+                const feature = e.features[0];
+                const dguid = e.features[0].properties.dguid;
+                const properties = feature.properties;
+                console.log(properties['dguid'], properties['count_total_1']);
+                //map.setFilter("my-layer", ["==", "dguid", dguid]);
+
+
+            }
+        });
+
+    </script>
+</body>
+
+</html>

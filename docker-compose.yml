@@ -1,0 +1,32 @@
+name: process-statcan-data
+
+services:
+  devcontainer:
+    container_name: devcontainer
+    user: root
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/workspace
+      - ./data:/data
+    env_file: .env
+    ports:
+      - 8888:8888
+    command: sleep infinity
+  db:
+    image: postgis/postgis:17-3.5-alpine
+    container_name: db
+    restart: unless-stopped
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    env_file: .env
+    ports:
+      - 5432:5432
+
+networks:
+  default:
+    name: dev-container
+
+volumes:
+  pgdata:

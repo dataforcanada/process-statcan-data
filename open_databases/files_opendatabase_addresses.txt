@@ -1,0 +1,10 @@
+https://www150.statcan.gc.ca/n1/en/pub/46-26-0001/2021001/ODA_AB_v1.zip
+https://www150.statcan.gc.ca/n1/en/pub/46-26-0001/2021001/ODA_BC_v1.zip
+https://www150.statcan.gc.ca/n1/en/pub/46-26-0001/2021001/ODA_MB_v1.zip
+https://www150.statcan.gc.ca/n1/en/pub/46-26-0001/2021001/ODA_NB_v1.zip
+https://www150.statcan.gc.ca/n1/en/pub/46-26-0001/2021001/ODA_NT_v1.zip
+https://www150.statcan.gc.ca/n1/en/pub/46-26-0001/2021001/ODA_NS_v1.zip
+https://www150.statcan.gc.ca/n1/en/pub/46-26-0001/2021001/ODA_ON_v1.zip
+https://www150.statcan.gc.ca/n1/en/pub/46-26-0001/2021001/ODA_PE_v1.zip
+https://www150.statcan.gc.ca/n1/en/pub/46-26-0001/2021001/ODA_QC_v1.zip
+https://www150.statcan.gc.ca/n1/en/pub/46-26-0001/2021001/ODA_SK_v1.zip

@@ -1,0 +1,36 @@
+### 2021 ###
+
+# https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/download-telecharger.cfm?Lang=E
+
+# Canada, provinces, territories (PRs), census divisions (CDs), census subdivisions (CSDs) and dissemination areas (DAs) (98-401-X2021006_eng_CSV.zip)
+https://archive.org/download/canadas-2021-census-of-population/98-401-X2021006_eng_CSV.zip	https://zenodo.org/records/15333781/files/98-401-X2021006_eng_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2021/98-401-X2021006_eng_CSV.zip
+
+# Census metropolitan areas (CMAs), tracted census agglomerations (CAs) and census tracts (CTs) (98-401-X2021007_eng_CSV.zip)
+https://archive.org/download/canadas-2021-census-of-population/98-401-X2021007_eng_CSV.zip	https://zenodo.org/records/15333781/files/98-401-X2021007_eng_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2021/98-401-X2021007_eng_CSV.zip
+
+# Economic regions (ERs) (98-401-X2021008_eng_CSV.zip)
+https://archive.org/download/canadas-2021-census-of-population/98-401-X2021008_eng_CSV.zip	https://zenodo.org/records/15333781/files/98-401-X2021008_eng_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2021/98-401-X2021008_eng_CSV.zip
+
+# Population centres (POPCTRs) (98-401-X2021009_eng_CSV.zip)
+https://archive.org/download/canadas-2021-census-of-population/98-401-X2021009_eng_CSV.zip	https://zenodo.org/records/15333781/files/98-401-X2021009_eng_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2021/98-401-X2021009_eng_CSV.zip
+
+# Federal electoral districts, 2013 representation order (98-401-X2021010_eng_CSV.zip)
+https://archive.org/download/canadas-2021-census-of-population/98-401-X2021010_eng_CSV.zip	https://zenodo.org/records/15333781/files/98-401-X2021010_eng_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2021/98-401-X2021010_eng_CSV.zip
+
+# Federal electoral districts, 2023 representation order (98-401-X2021029_eng_CSV.zip)
+https://archive.org/download/canadas-2021-census-of-population/98-401-X2021029_eng_CSV.zip	https://zenodo.org/records/15333781/files/98-401-X2021029_eng_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2021/98-401-X2021029_eng_CSV.zip
+
+# Designated places (DPLs) (98-401-X2021011_eng_CSV.zip)
+https://archive.org/download/canadas-2021-census-of-population/98-401-X2021011_eng_CSV.zip	https://zenodo.org/records/15333781/files/98-401-X2021011_eng_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2021/98-401-X2021011_eng_CSV.zip
+
+# Aggregate dissemination areas (ADAs) (98-401-X2021012_eng_CSV.zip)
+https://archive.org/download/canadas-2021-census-of-population/98-401-X2021012_eng_CSV.zip	https://zenodo.org/records/15333781/files/98-401-X2021012_eng_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2021/98-401-X2021012_eng_CSV.zip
+
+# Forward Sortation Areas (FSAs) (98-401-X2021013_eng_CSV.zip)
+https://archive.org/download/canadas-2021-census-of-population/98-401-X2021013_eng_CSV.zip	https://zenodo.org/records/15333781/files/98-401-X2021013_eng_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2021/98-401-X2021013_eng_CSV.zip
+
+# Dissolved census subdivisions (Dissolved CSDs) (98-401-X2021014_eng_CSV.zip)
+https://archive.org/download/canadas-2021-census-of-population/98-401-X2021014_eng_CSV.zip	https://zenodo.org/records/15334624/files/98-401-X2021014_eng_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2021/98-401-X2021014_eng_CSV.zip
+
+# Health Regions (HRs) and Home and Community Care Support Services (HCCCSS) 2022 (98-401-X2021015_eng_CSV.zip)
+https://archive.org/download/canadas-2021-census-of-population/98-401-X2021015_eng_CSV.zip	https://zenodo.org/records/15333781/files/98-401-X2021015_eng_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2021/98-401-X2021015_eng_CSV.zip

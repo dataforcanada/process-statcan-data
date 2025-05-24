@@ -1,0 +1,4 @@
+### 2001 ###
+
+# https://www12.statcan.gc.ca/english/census01/products/standard/popdwell/Tables.cfm
+# This one does not have all geographic levels as CSV: https://www12.statcan.gc.ca/census-recensement/2011/dp-pd/prof/details/download-telecharger/comprehensive/comp-csv-tab-dwnld-tlchrgr.cfm?Lang=E#tabs2011

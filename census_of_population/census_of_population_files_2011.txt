@@ -1,0 +1,45 @@
+### 2011 ###
+
+# https://www12.statcan.gc.ca/census-recensement/2011/dp-pd/prof/details/download-telecharger/comprehensive/comp-csv-tab-dwnld-tlchrgr.cfm?Lang=E#tabs2011
+
+# Canada, provinces, territories (PRs) (98-316-XWE2011001-101_CSV.zip)
+https://archive.org/download/canadas-2011-census-of-population/98-316-XWE2011001-101_CSV.zip	https://zenodo.org/records/15344413/files/98-316-XWE2011001-101_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2011/98-316-XWE2011001-101_CSV.zip
+
+# Census divisions (CDs) (98-316-XWE2011001-701_CSV.zip)
+https://archive.org/download/canadas-2011-census-of-population/98-316-XWE2011001-701_CSV.zip	https://zenodo.org/records/15344413/files/98-316-XWE2011001-701_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2011/98-316-XWE2011001-701_CSV.zip
+
+# Census subdivisions (CSDs) (98-316-XWE2011001-301_CSV.zip)
+https://archive.org/download/canadas-2011-census-of-population/98-316-XWE2011001-301_CSV.zip	https://zenodo.org/records/15344413/files/98-316-XWE2011001-301_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2011/98-316-XWE2011001-301_CSV.zip
+
+# Census metropolitan areas (CMAs), tracted census agglomerations (CAs) (98-316-XWE2011001-201_CSV.zip)
+https://archive.org/download/canadas-2011-census-of-population/98-316-XWE2011001-201_CSV.zip	https://zenodo.org/records/15344413/files/98-316-XWE2011001-201_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2011/98-316-XWE2011001-201_CSV.zip
+
+# Census tracts (CTs) (98-316-XWE2011001-401_CSV.zip)
+https://archive.org/download/canadas-2011-census-of-population/98-316-XWE2011001-401_CSV.zip	https://zenodo.org/records/15344413/files/98-316-XWE2011001-401_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2011/98-316-XWE2011001-401_CSV.zip
+
+# Federal electoral districts (FEDs) (2003 representation order) (98-316-XWE2011001-501_CSV.zip)
+https://archive.org/download/canadas-2011-census-of-population/98-316-XWE2011001-501_CSV.zip	https://zenodo.org/records/15344413/files/98-316-XWE2011001-501_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2011/98-316-XWE2011001-501_CSV.zip
+
+# Federal electoral districts (FEDs) (2013 representation order) (98-316-XWE2011001-511_CSV.zip)
+https://archive.org/download/canadas-2011-census-of-population/98-316-XWE2011001-511_CSV.zip	https://zenodo.org/records/15344413/files/98-316-XWE2011001-511_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2011/98-316-XWE2011001-511_CSV.zip
+
+# Economic regions (ERs) (98-316-XWE2011001-901_CSV.zip)
+https://archive.org/download/canadas-2011-census-of-population/98-316-XWE2011001-901_CSV.zip	https://zenodo.org/records/15344413/files/98-316-XWE2011001-901_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2011/98-316-XWE2011001-901_CSV.zip
+
+# Designated places (DPLs) (98-316-XWE2011001-1301_CSV.zip)
+https://archive.org/download/canadas-2011-census-of-population/98-316-XWE2011001-1301_CSV.zip	https://zenodo.org/records/15344413/files/98-316-XWE2011001-1301_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2011/98-316-XWE2011001-1301_CSV.zip
+
+# Population centres (POPCTRs) (98-316-XWE2011001-801_CSV.zip)
+https://archive.org/download/canadas-2011-census-of-population/98-316-XWE2011001-801_CSV.zip	https://zenodo.org/records/15344413/files/98-316-XWE2011001-801_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2011/98-316-XWE2011001-801_CSV.zip
+
+# Dissemination areas (DAs) (98-316-XWE2011001-1501_CSV.zip)
+https://archive.org/download/canadas-2011-census-of-population/98-316-XWE2011001-1501_CSV.zip	https://zenodo.org/records/15344413/files/98-316-XWE2011001-1501_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2011/98-316-XWE2011001-1501_CSV.zip
+
+# Dissolved census subdivisions (Dissolved CSDs) (98-316-XWE2011001-1401_CSV.zip)
+https://archive.org/download/canadas-2011-census-of-population/98-316-XWE2011001-1401_CSV.zip	https://zenodo.org/records/15344413/files/98-316-XWE2011001-1401_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2011/98-316-XWE2011001-1401_CSV.zip
+
+# Forward sortation areas (FSAs) (98-316-XWE2011001-1601_CSV.zip)
+https://archive.org/download/canadas-2011-census-of-population/98-316-XWE2011001-1601_CSV.zip	https://zenodo.org/records/15344413/files/98-316-XWE2011001-1601_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2011/98-316-XWE2011001-1601_CSV.zip
+
+# Health regions (HRs) (December 2013) (98-316-XWE2011001-1701_CSV.zip)
+https://archive.org/download/canadas-2011-census-of-population/98-316-XWE2011001-1701_CSV.zip	https://zenodo.org/records/15344413/files/98-316-XWE2011001-1701_CSV.zip?download=1	https://data.dataforcanada.org/archive/statistics_canada/census_of_population/2011/98-316-XWE2011001-1701_CSV.zip

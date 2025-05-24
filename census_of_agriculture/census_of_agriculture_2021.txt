@@ -1,0 +1,9 @@
+# https://open.canada.ca/data/en/dataset/b944bd53-49e5-4a80-83e5-1048d3abf38d
+
+# Download variables descriptions
+https://ftp.maps.canada.ca/pub/statcan_statcan/Agriculture_Agriculture/census_of_agriculture-recensement_agriculture/2021/CEAG21_VariablesDescriptions_REAG21_EN_FR.xlsx
+https://ftp.maps.canada.ca/pub/statcan_statcan/Agriculture_Agriculture/census_of_agriculture-recensement_agriculture/2021/CEAG21_AgriculturalOperations_ExploitationsAgricoles_REAG21.gdb.zip
+https://ftp.maps.canada.ca/pub/statcan_statcan/Agriculture_Agriculture/census_of_agriculture-recensement_agriculture/2021/CEAG21_Crops_Cultures_REAG21.gdb.zip
+https://ftp.maps.canada.ca/pub/statcan_statcan/Agriculture_Agriculture/census_of_agriculture-recensement_agriculture/2021/CEAG21_FarmOperators_ExploitantsAgricoles_REAG21.gdb.zip
+https://ftp.maps.canada.ca/pub/statcan_statcan/Agriculture_Agriculture/census_of_agriculture-recensement_agriculture/2021/CEAG21_LivestockPoultryBees_BetailVolailleAbeilles_REAG21.gdb.zip
+https://ftp.maps.canada.ca/pub/statcan_statcan/Agriculture_Agriculture/census_of_agriculture-recensement_agriculture/2021/CEAG21_UseTenurePractices_UtilisationOccupationPratiques_REAG21.gdb.zip

@@ -1,0 +1,8 @@
+https://www150.statcan.gc.ca/n1/en/pub/34-26-0001/2018001/ODB_v2_Alberta.zip?st=0J_AsIyy
+https://www150.statcan.gc.ca/n1/en/pub/34-26-0001/2018001/ODB_v2_BritishColumbia.zip
+https://www150.statcan.gc.ca/n1/en/pub/34-26-0001/2018001/ODB_v2_NewBrunswick.zip?st=k35-Ygwr
+https://www150.statcan.gc.ca/n1/en/pub/34-26-0001/2018001/ODB_v2_NorthwestTerritories.zip?st=SXozU436
+https://www150.statcan.gc.ca/n1/en/pub/34-26-0001/2018001/ODB_v2_NovaScotia.zip
+https://www150.statcan.gc.ca/n1/en/pub/34-26-0001/2018001/ODB_v2_Ontario.zip
+https://www150.statcan.gc.ca/n1/en/pub/34-26-0001/2018001/ODB_v2_Quebec.zip
+https://www150.statcan.gc.ca/n1/en/pub/34-26-0001/2018001/ODB_v2_Saskatchewan.zip

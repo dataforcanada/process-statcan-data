@@ -1,0 +1,26 @@
+{
+  "name": "process-statcan-data",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "devcontainer",
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
+  "forwardPorts": [
+    5432,
+    8888
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "vsls-contrib.gistfs",
+        "vscode-icons-team.vscode-icons",
+        "dorzey.vscode-sqlfluff"
+      ],
+      "settings": {
+        "python.pythonPath": "/root/.venv/bin/python",
+        "python.defaultInterpreterPath": "/root/.venv/bin/python"
+      }
+    }
+  }
+}

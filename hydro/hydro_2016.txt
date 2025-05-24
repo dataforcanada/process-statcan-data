@@ -1,0 +1,4 @@
+# https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm
+https://data.dataforcanada.org/archive/statistics_canada/hydro/2016/lhy_000c16a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/2016/lhy_000c16a_e.zip
+https://data.dataforcanada.org/archive/statistics_canada/hydro/2016/lhy_000d16a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/2016/lhy_000d16a_e.zip
+https://data.dataforcanada.org/archive/statistics_canada/hydro/2016/lhy_000h16a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/2016/lhy_000h16a_e.zip
