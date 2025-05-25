@@ -13,7 +13,7 @@ RUN apt-get install -y neovim \
                        git \
                        aria2 \
                        postgresql-client \
-		       zip
+                       zip
 
 # tippecanoe
 RUN git clone https://github.com/felt/tippecanoe.git \
@@ -29,7 +29,7 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | env UV_INSTALL_DIR="/usr/local/
 # Create virtual environment and install Python packages
 RUN uv venv ~/.venv \
     && cd ~ \
-    && uv pip install 'geopandas[all]' duckdb psycopg2-binary jupyterlab lonboard click stats-can openpyxl ordered-set sqlfluff
+    && uv pip install 'geopandas[all]' duckdb psycopg2-binary jupyterlab lonboard click stats-can openpyxl ordered-set sqlfluff buckaroo
 
 # Bash Kernel
 RUN cd ~ \
@@ -39,9 +39,6 @@ RUN cd ~ \
 # Install DuckDB
 RUN mkdir -p ~/.local/bin \
     && curl https://install.duckdb.org | sh
-
-# Install rclone
-RUN curl https://rclone.org/install.sh | bash
 
 # When user logs in, we use the spatial virtual environment
 RUN echo 'source /root/.venv/bin/activate' > ~/.bashrc \
