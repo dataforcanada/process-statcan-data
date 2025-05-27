@@ -29,7 +29,7 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | env UV_INSTALL_DIR="/usr/local/
 # Create virtual environment and install Python packages
 RUN uv venv ~/.venv \
     && cd ~ \
-    && uv pip install 'geopandas[all]' duckdb psycopg2-binary jupyterlab lonboard click stats-can openpyxl ordered-set sqlfluff buckaroo
+    && uv pip install 'geopandas[all]' duckdb psycopg2-binary jupyterlab lonboard click stats-can openpyxl ordered-set sqlfluff buckaroo jenkspy
 
 # Bash Kernel
 RUN cd ~ \
