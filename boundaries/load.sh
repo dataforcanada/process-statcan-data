@@ -31,40 +31,57 @@ EXTRACTED_FOLDER="${DATA_FOLDER}/boundaries/extracted"
 
 import_data_2021() {
     # Source: https://web.archive.org/web/20230307163203/https://www12.statcan.gc.ca/census-recensement/2021/geo/sip-pis/boundary-limites/index2021-eng.cfm?year=21
+    # For every geographic level, load digital boundary first, then cartographic
     # Provinces/territories
     import_to_postgis "${INPUT_FOLDER}/2021/lpr_000a21a_e.zip" lpr_000a21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2021/lpr_000b21a_e.zip" lpr_000b21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Census divisions
     import_to_postgis "${INPUT_FOLDER}/2021/lcd_000a21a_e.zip" lcd_000a21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2021/lcd_000b21a_e.zip" lcd_000b21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Federal electoral districts (2013 Representation Order)
     import_to_postgis "${INPUT_FOLDER}/2021/lfed000a21a_e.zip" lfed000a21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2021/lfed000b21a_e.zip" lfed000b21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Census subdivisions
     import_to_postgis "${INPUT_FOLDER}/2021/lcsd000a21a_e.zip" lcsd000a21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2021/lcsd000b21a_e.zip" lcsd000b21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Designated places
     import_to_postgis "${INPUT_FOLDER}/2021/ldpl000a21a_e.zip" ldpl000a21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2021/ldpl000b21a_e.zip" ldpl000b21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Forward sortation areas
     unzip -n "${INPUT_FOLDER}/2021/lfsa000a21a_e.zip" -d "${EXTRACTED_FOLDER}/2021"
+    unzip -n "${INPUT_FOLDER}/2021/lfsa000b21a_e.zip" -d "${EXTRACTED_FOLDER}/2021"
     import_to_postgis "${EXTRACTED_FOLDER}/2021/lfsa000a21a_e/lfsa000a21a_e.shp" lfsa000a21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${EXTRACTED_FOLDER}/2021/lfsa000b21a_e/lfsa000b21a_e.shp" lfsa000b21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Economic regions
     import_to_postgis "${INPUT_FOLDER}/2021/ler_000a21a_e.zip" ler_000a21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2021/ler_000b21a_e.zip" ler_000b21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # There's issues with the Census agricultural regions encoding, statcan did not export the shapefile properly
     # Census agricultural regions
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2021/lcar000a21a_e.zip" lcar000a21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2021/lcar000b21a_e.zip" lcar000b21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Census consolidated subdivisions
     import_to_postgis "${INPUT_FOLDER}/2021/lccs000a21a_e.zip" lccs000a21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2021/lccs000b21a_e.zip" lccs000b21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Census metropolitan areas and census agglomerations
     import_to_postgis "${INPUT_FOLDER}/2021/lcma000a21a_e.zip" lcma000a21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2021/lcma000b21a_e.zip" lcma000b21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Census tracts
     import_to_postgis "${INPUT_FOLDER}/2021/lct_000a21a_e.zip" lct_000a21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2021/lct_000b21a_e.zip" lct_000b21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Population centres
     import_to_postgis "${INPUT_FOLDER}/2021/lpc_000a21a_e.zip" lpc_000a21a_e "-lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2021/lpc_000b21a_e.zip" lpc_000b21a_e "-lco SCHEMA=bronze"
     # Dissemination areas
     import_to_postgis "${INPUT_FOLDER}/2021/lda_000a21a_e.zip" lda_000a21a_e "-lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2021/lda_000b21a_e.zip" lda_000b21a_e "-lco SCHEMA=bronze"
     # Dissemination blocks
     import_to_postgis "${INPUT_FOLDER}/2021/ldb_000a21a_e.zip" ldb_000a21a_e "-lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2021/ldb_000b21a_e.zip" ldb_000b21a_e "-lco SCHEMA=bronze"
     # Aggregate dissemination areas
     import_to_postgis "${INPUT_FOLDER}/2021/lada000a21a_e.zip" lada000a21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2021/lada000b21a_e.zip" lada000b21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Population ecumene
     unzip -n "${INPUT_FOLDER}/2021/lecu000e21a_e.zip" -d "${EXTRACTED_FOLDER}/2021"
     import_to_postgis "${EXTRACTED_FOLDER}/2021/lecu000e21a_e.shp" lecu000a21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
@@ -284,7 +301,7 @@ import_data_2001() {
 
 # Execute all import functions
 import_data_2021
-import_data_2016
-import_data_2011
-import_data_2006
+#import_data_2016
+#import_data_2011
+#import_data_2006
 #import_data_2001
