@@ -1,23 +1,27 @@
 ## Table of Contents
-- [About](#-about)
-- [How to Run](#-how-to-run)
-- [License](#-license)
+- [About](#about)
+- [How to Run](#how-to-run)
+- [License](#license)
 
 ## About
 
-**process-statcan-data** is a set of scripts that helps you load all Statistics Canada data required for data analysis. Specifically this loads:
+**process-statcan-data** is a set of scripts that helps you load and prepare Statistics Canada data for analysis. It performs schema normalization, field name standardization, and adds derived fields (such as DGUIDs) to improve consistency, interoperability, and usability across datasets.
 
-- **Boundaries**: Geographic boundaries from 2001 to 2021.
-- **Road Network Files**: Road network files from 2001 to 2021.
-- **Health Regions**: Health Regions from 2003 to 2023.
-- **National Address Register**: National Address Register files from 2022 to 2024.
-- **Census of Population**: Census of Population data from 2001 to 2021.
-- **Census of Agriculture**: Census of Agriculture from 2001 to 2021.
-- **National Household Survey**: National Household Survey from 2011 to 2016.
+All output datasets are written in GeoParquet format to support modern geospatial workflows and ensure broad compatibility across platforms.
+
+This project processes the following datasets:
+
+- **Geographic Boundaries** (2001–2021)
+- **Road Network Files** (2001–2021)
+- **Health Regions** (2003–2023)
+- **National Address Register** (2022–2024)
+- **Census of Population** (2001–2021)
+- **Census of Agriculture** (2001–2021)
+- **National Household Survey** (2011–2016)
 
 ## How to Run
 
-We make use of Dev Container to run the code:
+This project uses a **Dev Container** environment for setup and execution:
 
 ```shell
 # Clone the repository
