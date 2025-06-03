@@ -12,6 +12,22 @@ https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/gda_000
 https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/gdb_000a11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/gdb_000a11a_e.zip
 https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/gdpl000a11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/gdpl000a11a_e.zip
 https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/gpc_000a11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/gpc_000a11a_e.zip
+https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/gfsa000a11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/gfsa000a11a_e.zip
+# Cartographic Boundary Files
+https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/gpr_000b11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/gpr_000b11a_e.zip
+https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/gfed000b11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/gfed000b11a_e.zip
+https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/ger_000b11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/ger_000b11a_e.zip
+https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/gcd_000b11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/gcd_000b11a_e.zip
+https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/gcar000b11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/gcar000b11a_e.zip
+https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/gccs000b11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/gccs000b11a_e.zip
+https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/gcsd000b11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/gcsd000b11a_e.zip
+https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/gcma000b11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/gcma000b11a_e.zip
+https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/gct_000b11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/gct_000b11a_e.zip
+https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/gda_000b11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/gda_000b11a_e.zip
+https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/gdb_000b11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/gdb_000b11a_e.zip
+https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/gdpl000b11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/gdpl000b11a_e.zip
+https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/gpc_000b11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/gpc_000b11a_e.zip
+https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/gfsa000b11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/gfsa000b11a_e.zip
+# Other
 https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/gecu000e11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/gecu000e11a_e.zip
 https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/geca000e11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/geca000e11a_e.zip
-https://data.dataforcanada.org/archive/statistics_canada/boundaries/2011/gfsa000a11a_e.zip	https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/gfsa000a11a_e.zip

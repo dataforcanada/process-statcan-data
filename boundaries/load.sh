@@ -55,7 +55,6 @@ import_data_2021() {
     # Economic regions
     import_to_postgis "${INPUT_FOLDER}/2021/ler_000a21a_e.zip" ler_000a21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     import_to_postgis "${INPUT_FOLDER}/2021/ler_000b21a_e.zip" ler_000b21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
-    # There's issues with the Census agricultural regions encoding, statcan did not export the shapefile properly
     # Census agricultural regions
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2021/lcar000a21a_e.zip" lcar000a21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
@@ -72,13 +71,13 @@ import_data_2021() {
     import_to_postgis "${INPUT_FOLDER}/2021/lct_000b21a_e.zip" lct_000b21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Population centres
     import_to_postgis "${INPUT_FOLDER}/2021/lpc_000a21a_e.zip" lpc_000a21a_e "-lco SCHEMA=bronze"
-    import_to_postgis "${INPUT_FOLDER}/2021/lpc_000b21a_e.zip" lpc_000b21a_e "-lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2021/lpc_000b21a_e.zip" lpc_000b21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Dissemination areas
     import_to_postgis "${INPUT_FOLDER}/2021/lda_000a21a_e.zip" lda_000a21a_e "-lco SCHEMA=bronze"
-    import_to_postgis "${INPUT_FOLDER}/2021/lda_000b21a_e.zip" lda_000b21a_e "-lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2021/lda_000b21a_e.zip" lda_000b21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Dissemination blocks
     import_to_postgis "${INPUT_FOLDER}/2021/ldb_000a21a_e.zip" ldb_000a21a_e "-lco SCHEMA=bronze"
-    import_to_postgis "${INPUT_FOLDER}/2021/ldb_000b21a_e.zip" ldb_000b21a_e "-lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2021/ldb_000b21a_e.zip" ldb_000b21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Aggregate dissemination areas
     import_to_postgis "${INPUT_FOLDER}/2021/lada000a21a_e.zip" lada000a21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     import_to_postgis "${INPUT_FOLDER}/2021/lada000b21a_e.zip" lada000b21a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
@@ -94,32 +93,46 @@ import_data_2016() {
     # Source: https://web.archive.org/web/20230120140926/https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm
     # Provinces/territories
     import_to_postgis "${INPUT_FOLDER}/2016/lpr_000a16a_e.zip" lpr_000a16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2016/lpr_000b16a_e.zip" lpr_000b16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Federal electoral districts (2013 Representation Order)
     import_to_postgis "${INPUT_FOLDER}/2016/lfed000a16a_e.zip" lfed000a16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2016/lfed000b16a_e.zip" lfed000b16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Economic regions
     import_to_postgis "${INPUT_FOLDER}/2016/ler_000a16a_e.zip" ler_000a16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2016/ler_000b16a_e.zip" ler_000b16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Census divisions
     import_to_postgis "${INPUT_FOLDER}/2016/lcd_000a16a_e.zip" lcd_000a16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2016/lcd_000b16a_e.zip" lcd_000b16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Aggregate dissemination areas
     import_to_postgis "${INPUT_FOLDER}/2016/lada000a16a_e.zip" lada000a16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2016/lada000b16a_e.zip" lada000b16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Census agricultural regions
     import_to_postgis "${INPUT_FOLDER}/2016/lcar000a16a_e.zip" lcar000a16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2016/lcar000b16a_e.zip" lcar000b16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Census consolidated subdivisions
     import_to_postgis "${INPUT_FOLDER}/2016/lccs000a16a_e.zip" lccs000a16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2016/lccs000b16a_e.zip" lccs000b16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Census subdivisions
     import_to_postgis "${INPUT_FOLDER}/2016/lcsd000a16a_e.zip" lcsd000a16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2016/lcsd000b16a_e.zip" lcsd000b16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Census metropolitan areas and census agglomerations
     import_to_postgis "${INPUT_FOLDER}/2016/lcma000a16a_e.zip" lcma000a16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2016/lcma000b16a_e.zip" lcma000b16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Census tracts
+    import_to_postgis "${INPUT_FOLDER}/2016/lct_000a16a_e.zip" lct_000a16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     import_to_postgis "${INPUT_FOLDER}/2016/lct_000a16a_e.zip" lct_000a16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Dissemination areas
     import_to_postgis "${INPUT_FOLDER}/2016/lda_000a16a_e.zip" lda_000a16a_e "-lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2016/lda_000b16a_e.zip" lda_000b16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Dissemination blocks
     import_to_postgis "${INPUT_FOLDER}/2016/ldb_000a16a_e.zip" ldb_000a16a_e "-lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2016/ldb_000b16a_e.zip" ldb_000b16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Designated places
     import_to_postgis "${INPUT_FOLDER}/2016/ldpl000a16a_e.zip" ldpl000a16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2016/ldpl000b16a_e.zip" ldpl000b16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Population centres
     import_to_postgis "${INPUT_FOLDER}/2016/lpc_000a16a_e.zip" lpc_000a16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2016/lpc_000b16a_e.zip" lpc_000b16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Population ecumene
     unzip -n "${INPUT_FOLDER}/2016/lecu000e16a_e.zip" -d "${EXTRACTED_FOLDER}/2016"
     import_to_postgis "${EXTRACTED_FOLDER}/2016/lecu000e16a_e.shp" lecu000e16a_e  "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
@@ -128,6 +141,7 @@ import_data_2016() {
     import_to_postgis "${EXTRACTED_FOLDER}/2016/lagecu000e16a_e.shp" lagecu000e16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Forward sortation areas
     import_to_postgis "${INPUT_FOLDER}/2016/lfsa000a16a_e.zip" lfsa000a16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2016/lfsa000b16a_e.zip" lfsa000b16a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
 }
 
 import_data_2011() {
@@ -135,54 +149,67 @@ import_data_2011() {
     # Provinces/territories
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2011/gpr_000a11a_e.zip" gpr_000a11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2011/gpr_000b11a_e.zip" gpr_000b11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Federal electoral districts (2003 Representation Order)
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2011/gfed000a11a_e.zip" gfed000a11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2011/gfed000b11a_e.zip" gfed000b11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Economic regions
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2011/ger_000a11a_e.zip" ger_000a11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2011/ger_000b11a_e.zip" ger_000b11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Census divisions
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2011/gcd_000a11a_e.zip" gcd_000a11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2011/gcd_000b11a_e.zip" gcd_000b11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Census agricultural regions
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2011/gcar000a11a_e.zip" gcar000a11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2011/gcar000b11a_e.zip" gcar000b11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Census consolidated subdivisions
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2011/gccs000a11a_e.zip" gccs000a11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2011/gccs000b11a_e.zip" gccs000b11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Census subdivisions
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2011/gcsd000a11a_e.zip" gcsd000a11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2011/gcsd000b11a_e.zip" gcsd000b11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Census metropolitan areas and census agglomerations
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2011/gcma000a11a_e.zip" gcma000a11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2011/gcma000b11a_e.zip" gcma000b11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Census tracts
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2011/gct_000a11a_e.zip" gct_000a11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2011/gct_000b11a_e.zip" gct_000b11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Dissemination areas
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2011/gda_000a11a_e.zip" gda_000a11a_e "-lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2011/gda_000b11a_e.zip" gda_000b11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Dissemination blocks
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2011/gdb_000a11a_e.zip" gdb_000a11a_e "-lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2011/gdb_000b11a_e.zip" gdb_000b11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Designated places
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2011/gdpl000a11a_e.zip" gdpl000a11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2011/gdpl000b11a_e.zip" gdpl000b11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Population centres
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2011/gpc_000a11a_e.zip" gpc_000a11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2011/gpc_000b11a_e.zip" gpc_000b11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Population ecumene
     unzip -n "${INPUT_FOLDER}/2011/gecu000e11a_e.zip" -d "${EXTRACTED_FOLDER}/2011"
@@ -193,6 +220,7 @@ import_data_2011() {
     # Forward sortation areas
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2011/gfsa000a11a_e.zip" gfsa000a11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2011/gfsa000b11a_e.zip" gfsa000b11a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
 }
 
@@ -201,46 +229,59 @@ import_data_2006() {
     # Provinces/territories
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2006/gpr_000a06a_e.zip" gpr_000a06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2006/gpr_000b06a_e.zip" gpr_000b06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Federal electoral districts (2003 Representation Order)
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2006/gfed000a06a_e.zip" gfed000a06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2006/gfed000b06a_e.zip" gfed000b06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Economic regions
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2006/ger_000a06a_e.zip" ger_000a06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2006/ger_000b06a_e.zip" ger_000b06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Census divisions
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2006/gcd_000a06a_e.zip" gcd_000a06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2006/gcd_000b06a_e.zip" gcd_000b06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Census agricultural regions
     #import_to_postgis "${INPUT_FOLDER}/2006/gcar000a06a_e.zip" gcar000a06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    #import_to_postgis "${INPUT_FOLDER}/2006/gcar000b06a_e.zip" gcar000b06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Census consolidated subdivisions
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2006/gccs000a06a_e.zip" gccs000a06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2006/gccs000b06a_e.zip" gccs000b06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Census subdivisions
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2006/gcsd000a06a_e.zip" gcsd000a06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2006/gcsd000b06a_e.zip" gcsd000b06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Census metropolitan areas and census agglomerations
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2006/gcma000a06a_e.zip" gcma000a06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2006/gcma000b06a_e.zip" gcma000b06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Census tracts
     import_to_postgis "${INPUT_FOLDER}/2006/gct_000a06a_e.zip" gct_000a06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2006/gct_000b06a_e.zip" gct_000b06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Dissemination areas
     import_to_postgis "${INPUT_FOLDER}/2006/gda_000a06a_e.zip" gda_000a06a_e "-lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2006/gda_000b06a_e.zip" gda_000b06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Dissemination blocks
     import_to_postgis "${INPUT_FOLDER}/2006/gdb_000a06a_e.zip" gdb_000a06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2006/gdb_000b06a_e.zip" gdb_000b06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     # Designated places
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2006/gdpl000a06a_e.zip" gdpl000a06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2006/gdpl000b06a_e.zip" gdpl000b06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Urban areas
     export PGCLIENTENCODING=LATIN-1;
     import_to_postgis "${INPUT_FOLDER}/2006/gua_000a06a_e.zip" gua_000a06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
+    import_to_postgis "${INPUT_FOLDER}/2006/gua_000b06a_e.zip" gua_000b06a_e "-nlt PROMOTE_TO_MULTI -lco SCHEMA=bronze"
     unset PGCLIENTENCODING
     # Population ecumene
     unzip -n "${INPUT_FOLDER}/2006/gecu000e06a_e.zip" -d "${EXTRACTED_FOLDER}/2006"
@@ -301,7 +342,7 @@ import_data_2001() {
 
 # Execute all import functions
 import_data_2021
-#import_data_2016
-#import_data_2011
-#import_data_2006
-#import_data_2001
+import_data_2016
+import_data_2011
+import_data_2006
+import_data_2001
