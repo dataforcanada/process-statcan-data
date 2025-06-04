@@ -6,8 +6,9 @@ Forward Sortation Areas
 Definition here: https://web.archive.org/web/20241102112247/https://www12.statcan.gc.ca/census-recensement/2021/ref/dict/az/Definition-eng.cfm?ID=geo036
 */
 
-DROP TABLE IF EXISTS silver.fsa_2021;
-CREATE TABLE silver.fsa_2021 AS
+-- Digital boundary;
+DROP TABLE IF EXISTS silver.fsa_2021_digital;
+CREATE TABLE silver.fsa_2021_digital AS
 SELECT DISTINCT
     pr.country_dguid,
     pr.country_en_name,
@@ -26,18 +27,56 @@ SELECT DISTINCT
     fsa.dguid AS fsa_dguid,
     fsa.geom
 FROM bronze.lfsa000a21a_e AS fsa,
-    silver.pr_2021 AS pr
+    silver.pr_2021_digital AS pr
 WHERE concat('2021A0002', fsa.pruid) = pr.pr_dguid;
 
 -- Make geometries valid
 UPDATE
-    silver.fsa_2021
+    silver.fsa_2021_digital
 SET
     geom = st_makevalid(geom)
 WHERE
     st_isvalid(geom) = 'f';
 
 -- Create spatial index
-CREATE INDEX fsa_2021_geom_idx ON silver.fsa_2021 USING gist (geom) WITH (
+CREATE INDEX fsa_2021_digital_geom_idx ON silver.fsa_2021_digital USING gist (geom) WITH (
+    fillfactor = 100
+);
+
+-- Cartographic boundary;
+DROP TABLE IF EXISTS silver.fsa_2021_cartographic;
+CREATE TABLE silver.fsa_2021_cartographic AS
+SELECT DISTINCT
+    b.country_dguid,
+    b.country_en_name,
+    b.country_fr_name,
+    b.country_en_abbreviation,
+    b.country_fr_abbreviation,
+    b.grc_dguid,
+    b.grc_en_name,
+    b.grc_fr_name,
+    b.pr_dguid,
+    b.pr_en_name,
+    b.pr_fr_name,
+    b.pr_en_abbreviation,
+    b.pr_fr_abbreviation,
+    b.pr_iso_code,
+    b.fsa_dguid,
+    a.geom
+FROM
+    bronze.lfsa000b21a_e AS a,
+    silver.fsa_2021_digital AS b
+WHERE a.dguid = b.fsa_dguid;
+
+-- Make geometries valid
+UPDATE
+    silver.fsa_2021_cartographic
+SET
+    geom = st_makevalid(geom)
+WHERE
+    st_isvalid(geom) = 'f';
+
+-- Create spatial index
+CREATE INDEX fsa_2021_cartographic_geom_idx ON silver.fsa_2021_cartographic USING gist (geom) WITH (
     fillfactor = 100
 );

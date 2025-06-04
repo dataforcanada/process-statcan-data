@@ -6,8 +6,9 @@ Dissemination Blocks
 Definition here: https://web.archive.org/web/20250212081621/https://www12.statcan.gc.ca/census-recensement/2021/ref/dict/az/definition-eng.cfm?ID=geo014
 */
 
-DROP TABLE IF EXISTS silver.db_2021;
-CREATE TABLE silver.db_2021 AS
+-- Digital boundary;
+DROP TABLE IF EXISTS silver.db_2021_digital;
+CREATE TABLE silver.db_2021_digital AS
 SELECT DISTINCT
     csd.country_dguid,
     csd.country_en_name,
@@ -52,22 +53,86 @@ SELECT DISTINCT
     dgr.db_dguid,
     db.geom
 FROM silver.dissemination_geographies_relationship_2021 AS dgr
-LEFT JOIN silver.csd_2021 AS csd
+LEFT JOIN silver.csd_2021_digital AS csd
     ON dgr.csd_dguid = csd.csd_dguid
-LEFT JOIN silver.fed_2021 AS fed
+LEFT JOIN silver.fed_2021_2013_digital AS fed
     ON dgr.fed_dguid = fed.fed_dguid
 LEFT JOIN bronze.ldb_000a21a_e AS db
     ON dgr.db_dguid = db.dguid;
 
 -- Make geometries valid
 UPDATE
-    silver.db_2021
+    silver.db_2021_digital
 SET
     geom = st_makevalid(geom)
 WHERE
     st_isvalid(geom) = 'f';
 
 -- Create spatial index
-CREATE INDEX db_2021_geom_idx ON silver.db_2021 USING gist (geom) WITH (
+CREATE INDEX db_2021_digital_geom_idx ON silver.db_2021_digital USING gist (geom) WITH (
+    fillfactor = 100
+);
+
+-- Cartographic boundary;
+DROP TABLE IF EXISTS silver.db_2021_cartographic;
+CREATE TABLE silver.db_2021_cartographic AS
+SELECT DISTINCT
+    b.country_dguid,
+    b.country_en_name,
+    b.country_fr_name,
+    b.country_en_abbreviation,
+    b.country_fr_abbreviation,
+    b.grc_dguid,
+    b.grc_en_name,
+    b.grc_fr_name,
+    b.pr_dguid,
+    b.pr_en_name,
+    b.pr_fr_name,
+    b.pr_en_abbreviation,
+    b.pr_fr_abbreviation,
+    b.pr_iso_code,
+    b.car_dguid,
+    b.car_en_name,
+    b.car_fr_name,
+    b.er_dguid,
+    b.er_name,
+    b.cd_dguid,
+    b.cd_name,
+    b.cd_type,
+    b.ccs_dguid,
+    b.ccs_name,
+    b.cma_dguid,
+    b.cma_p_dguid,
+    b.cma_name,
+    b.cma_type,
+    b.csd_dguid,
+    b.csd_name,
+    b.csd_type,
+    b.sac_type,
+    b.sac_code,
+    b.fed_dguid,
+    b.fed_name,
+    b.fed_en_name,
+    b.fed_fr_name,
+    b.ct_dguid,
+    b.ada_dguid,
+    b.da_dguid,
+    b.db_dguid,
+    a.geom
+FROM
+    bronze.ldb_000b21a_e AS a,
+    silver.db_2021_digital AS b
+WHERE b.db_dguid = a.dguid;
+
+-- Make geometries valid
+UPDATE
+    silver.db_2021_cartographic
+SET
+    geom = st_makevalid(geom)
+WHERE
+    st_isvalid(geom) = 'f';
+
+-- Create spatial index
+CREATE INDEX db_2021_cartographic_geom_idx ON silver.db_2021_cartographic USING gist (geom) WITH (
     fillfactor = 100
 );
