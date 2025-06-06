@@ -48,3 +48,8 @@ census_of_population/process.sh
 census_of_agriculture/download.sh
 ## 7.2 Process Census of Agriculture ##
 census_of_agriculture/process.sh
+#### 8.0 National Address Register ####
+## 8.1 Download National Address Register ##
+national_address_register/download.sh
+## 8.2 Load National Address Register ##
+national_address_register/process.sh
