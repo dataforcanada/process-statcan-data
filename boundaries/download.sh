@@ -3,6 +3,7 @@ if [ ! -d "${DATA_FOLDER}/boundaries" ]
 then
     echo "Making directory ${DATA_FOLDER}/boundaries/"
     mkdir -p ${DATA_FOLDER}/boundaries/{input,extracted,output}/{2021,2016,2011,2001}
+    mkdir -p ${DATA_FOLDER}/boundaries/output/{2021,2016,2011,2001}/{cartographic_boundary_files,digital_boundary_files}
 fi
 
 INPUT_FOLDER="${DATA_FOLDER}/boundaries/input"
