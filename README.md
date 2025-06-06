@@ -12,16 +12,15 @@ All output datasets are written in GeoParquet format to support modern geospatia
 This project processes the following datasets:
 
 - **Geographic Boundaries** (2001–2021)
-- **Road Network Files** (2001–2021)
-- **Health Regions** (2003–2023)
-- **National Address Register** (2022–2024)
 - **Census of Population** (2001–2021)
-- **Census of Agriculture** (2001–2021)
 - **National Household Survey** (2011–2016)
+- **Census of Agriculture** (2001–2021)
+- **National Address Register** (2022–2024)
+- **Road Network Files** (2001–2021)
 
 ## How to Run
 
-This project uses a **Dev Container** environment for setup and execution:
+This project uses a Dev Container environment for setup and execution. If you are using VS Code all you need is the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) installed and Docker installed on your system. 
 
 ```shell
 # Clone the repository
@@ -29,6 +28,9 @@ git clone https://github.com/dataforcanada/process-statcan-data.git
 
 # Navigate to the project directory
 cd process-statcan-data
+
+# In Dev Container
+./main.sh
 ```
 
 ## License
