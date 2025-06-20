@@ -8,7 +8,6 @@ import zipfile
 from zoneinfo import ZoneInfo
 
 import pandas as pd
-import polars as pl
 import requests
 from tqdm import tqdm
 
@@ -16,7 +15,6 @@ data_folder = "/data/tables"
 input_folder = f"{data_folder}/input"
 scratch_folder = f"{data_folder}/scratch"
 output_folder = f"{data_folder}/output"
-
 
 if not os.path.exists(f"{data_folder}/processing.db"):
     con = sqlite3.connect(f"{data_folder}/processing.db")
@@ -42,7 +40,7 @@ def setup():
     """
     Makes data folders
     """
-    folders_to_create = [data_folder, input_folder,
+    folders_to_create = [data_folder, input_folder, 
                          scratch_folder, output_folder,
                          f"{input_folder}/en", f"{output_folder}/en",
                          f"{input_folder}/fr", f"{output_folder}/fr",
@@ -125,29 +123,62 @@ def update_tables():
         download_cube(product_id)
         process_cube(product_id)
 
+def compute_ref_date_bounds(df):
+    """
+    TODO: There are cases where the REF_DATE is a range, ex. 2023/2024.
+    For productId 17100022 the period is from July 1 to June 30 (seen in the metadata), so can't just 
+    use January 1, 2023 and December 31, 2024
+    """
+    series = df["REF_DATE"]
+
+    # Initialize the two new columns with NaT
+    df["REF_START_DATE"] = pd.NaT
+    df["REF_END_DATE"] = pd.NaT
+
+    # Skip rows that contain slashes
+    valid_mask = ~series.str.contains("/", na=False)
+
+    # Case 1: YYYY-MM-DD
+    full_mask = valid_mask & series.str.fullmatch(r"\d{4}-\d{2}-\d{2}")
+    parsed_full = pd.to_datetime(series[full_mask], format="%Y-%m-%d", errors="coerce")
+    df.loc[full_mask, "REF_START_DATE"] = parsed_full
+    df.loc[full_mask, "REF_END_DATE"] = parsed_full
+
+    # Case 2: YYYY-MM
+    month_mask = valid_mask & series.str.fullmatch(r"\d{4}-\d{2}")
+    parsed_month = pd.to_datetime(series[month_mask], format="%Y-%m", errors="coerce")
+    df.loc[month_mask, "REF_START_DATE"] = parsed_month
+    df.loc[month_mask, "REF_END_DATE"] = parsed_month + pd.to_timedelta(
+        parsed_month.dt.days_in_month - 1, unit='D'
+    )
+
+    # Case 3: YYYY
+    year_mask = valid_mask & series.str.fullmatch(r"\d{4}")
+    parsed_year = pd.to_datetime(series[year_mask], format="%Y", errors="coerce")
+    df.loc[year_mask, "REF_START_DATE"] = parsed_year
+    df.loc[year_mask, "REF_END_DATE"] = parsed_year + pd.offsets.YearEnd(0)
+
+    # Move columns after REF_DATE
+    ref_idx = df.columns.get_loc("REF_DATE")
+    cols = list(df.columns)
+    cols.remove("REF_START_DATE")
+    cols.remove("REF_END_DATE")
+    cols[ref_idx + 1:ref_idx + 1] = ["REF_START_DATE", "REF_END_DATE"]
+
+    return df[cols]
+
 def convert_to_lowest_type(df):
     """
     Convert columns to the best possible dtypes
-    For example, if the column is numerical and has a maximum value of 32,000
+    For example, if the column is numerical and has a maximum value of 32,000 
     we can assign it a type of int16
     """
-    print("Converting dataframe to optimal data types")
-    params = {
-        'convert_string': False,
-        'convert_boolean': False
-    }
-    df = df.convert_dtypes(**params)
-
     dtypes = pd.DataFrame(df.dtypes)
     # Downcast to the smallest numerical dtype
     for row in dtypes.itertuples():
         column = row[0]
         the_type = str(row[1])
-        # Skipping downcasting Float64 as there were issues with decimal places
-        # For example, instead of a value being 65.4, it turned into 65.4000015258789
-        if the_type == 'Float64':
-            continue
-        elif the_type == 'Int64':
+        if the_type == 'int64':
             df[column] = pd.to_numeric(df[column], downcast='integer')
 
     return df
@@ -193,6 +224,17 @@ def download_cube(product_id, language="en"):
         progress_bar.close()
 
 def process_cube(product_id, language="en"):
+    """
+    Examples: 
+    - productId 43100011 has all with DECIMAL = 1 (float64)
+    - productId 17100009 has DECIMAL = 0 (int64)
+    - productId 35100076 has multiple DECIMAL precisions [0, 1, 2] (int64, float64, float64)
+    """
+    cur.execute("SELECT product_id FROM downloaded WHERE product_id = ?", (product_id,))
+    result = cur.fetchone()
+    if result:
+        print(f"Already processed {product_id}")
+        return
     extract_zipfile(product_id, language)
     """
     The pandas column reader is better than the Polars one
@@ -207,26 +249,70 @@ def process_cube(product_id, language="en"):
     #    json.dump(metadata, outfile)
     # Read CSV using Pandas
     product_csv = f"{scratch_folder}/{product_id}.csv"
+    print(f"Reading {product_csv}")
     parameters = {
         "engine": "c",
-        "low_memory": True
+        "low_memory": True,
+        "nrows": 100000,
+        "dtype": {}
     }
+    columns = pd.read_csv(product_csv, nrows=0).columns
+
+    columns_always_int_8 = ["DECIMALS", "SCALAR_ID"]
+    for column in columns_always_int_8:
+        if column in columns:
+            parameters["dtype"][column] = 'int8'
+
+    columns_always_int_16 = ["UOM_ID"]
+    for column in columns_always_int_16:
+        if column in columns:
+            parameters["dtype"][column] = 'int16'
+
+    for column in columns:
+        if column not in columns_always_int_8 and column not in columns_always_int_16 and column != "VALUE":
+            parameters["dtype"][column] = 'string'
+
+    if not parameters["dtype"]:
+        del parameters["dtype"]
+
     print(f"Reading {product_csv} as a Pandas dataframe")
     df = pd.read_csv(product_csv, **parameters)
+    unique_decimal_values = df["DECIMALS"].unique()
+    if any(unique_decimal_values):
+        """
+        A table can have both float and integer in the VALUE field. 
+        productId 11100025 is an example
+        So if we have unique values for DECIMALS to be [0,1], then we convert to float64
+        """
+        convert_dict = {"VALUE": "float64"}
+        print(convert_dict)
+        df = df.astype(convert_dict)
+    elif 0 in (unique_decimal_values):
+        if df["VALUE"].dtype != "Int64":
+            # If DECIMALS = [0]
+            convert_dict = {"VALUE": "Int64"}
+            print(convert_dict)
+            df = df.astype(convert_dict)
+
     df = convert_to_lowest_type(df)
-    print("Import Pandas dataframe as a Polars dataframe")
-    df = pl.from_pandas(df)
+    df = compute_ref_date_bounds(df)
     output_parquet = f"{output_folder}/{language}/{product_id}.parquet"
     print(f"Exporting dataframe as parquet to {output_parquet}")
-    df.write_parquet(output_parquet,
-                     compression='zstd',
-                     compression_level=22)
+    parameters = {
+        "path": output_parquet,
+        "engine": "pyarrow",
+        "compression": "zstd",
+        "index": False,
+        "compression_level": 22
+    }
+    df.to_parquet(**parameters)
     # Remove the scratch files
     print("Removing scratch files")
     os.remove(f"{scratch_folder}/{product_id}.csv")
     os.remove(f"{scratch_folder}/{product_id}_MetaData.csv")
     update_last_downloaded(product_id)
     update_last_processed(product_id)
+
 
 if __name__ == '__main__':
     setup()
@@ -235,5 +321,7 @@ if __name__ == '__main__':
     files_to_process = [x.split("/")[-1].split(".zip")[0] for x in files_to_process]
     to_process = len(files_to_process)
     print(f"Processing {to_process}")
-    with Pool(4) as p:
-        p.map(process_cube, files_to_process)
+    #for product_id in files_to_process:
+    #    process_cube(product_id)
+    with Pool(processes=16) as p:
+        p.map(process_cube, files_to_process, chunksize=8)
