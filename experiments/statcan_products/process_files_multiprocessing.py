@@ -178,7 +178,7 @@ def convert_to_lowest_type(df):
     for row in dtypes.itertuples():
         column = row[0]
         the_type = str(row[1])
-        if the_type == 'int64':
+        if the_type == 'Int64':
             df[column] = pd.to_numeric(df[column], downcast='integer')
 
     return df
@@ -229,6 +229,8 @@ def process_cube(product_id, language="en"):
     - productId 43100011 has all with DECIMAL = 1 (float64)
     - productId 17100009 has DECIMAL = 0 (int64)
     - productId 35100076 has multiple DECIMAL precisions [0, 1, 2] (int64, float64, float64)
+    - productId 10100164 has two columns named the same "Value" and "VALUE". It is processed fine with the read_csv, and when it is exported as parquet.
+    DuckDB has an issue with it, but Pandas and Polars are able to handle "Value" and "VALUE"
     """
     cur.execute("SELECT product_id FROM downloaded WHERE product_id = ?", (product_id,))
     result = cur.fetchone()
@@ -268,6 +270,7 @@ def process_cube(product_id, language="en"):
         if column in columns:
             parameters["dtype"][column] = 'int16'
 
+    # The remaining columns should be string, with the exception of VALUE
     for column in columns:
         if column not in columns_always_int_8 and column not in columns_always_int_16 and column != "VALUE":
             parameters["dtype"][column] = 'string'
