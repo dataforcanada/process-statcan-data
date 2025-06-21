@@ -230,7 +230,7 @@ def process_cube(product_id, language="en"):
     - productId 17100009 has DECIMAL = 0 (int64)
     - productId 35100076 has multiple DECIMAL precisions [0, 1, 2] (int64, float64, float64)
     - productId 10100164 has two columns named the same "Value" and "VALUE". It is processed fine with the read_csv, and when it is exported as parquet.
-    DuckDB has an issue with it, but Pandas and Polars are able to handle "Value" and "VALUE"
+    DuckDB has an issue with it (as it is case insensitive), but Pandas and Polars are able to handle "Value" and "VALUE"
     """
     cur.execute("SELECT product_id FROM downloaded WHERE product_id = ?", (product_id,))
     result = cur.fetchone()
