@@ -3,6 +3,7 @@
   "dockerComposeFile": "../docker-compose.yml",
   "service": "devcontainer",
   "workspaceFolder": "/workspace",
+  "containerUser": "ubuntu",
   "shutdownAction": "stopCompose",
   "forwardPorts": [
     5432,
@@ -14,13 +15,15 @@
         "ms-python.python",
         "ms-toolsai.jupyter",
         "vsls-contrib.gistfs",
-        "vscode-icons-team.vscode-icons",
-        "dorzey.vscode-sqlfluff"
+        "vscode-icons-team.vscode-icons"
       ],
       "settings": {
-        "python.pythonPath": "/root/.venv/bin/python",
-        "python.defaultInterpreterPath": "/root/.venv/bin/python"
+        "python.pythonPath": "/home/ubuntu/.venv/bin/python",
+        "python.defaultInterpreterPath": "/home/ubuntu/.venv/bin/python"
       }
     }
-  }
+  },
+  "mounts": [
+		"source=${localEnv:HOME}/.ssh,target=/home/ubuntu/.ssh,type=bind,consistency=cached"
+	]
 }
