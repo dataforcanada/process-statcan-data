@@ -2,12 +2,14 @@ from datetime import datetime
 import glob
 from multiprocessing import Pool
 import json
+import logging
 import os
 import sqlite3
 import zipfile
 from zoneinfo import ZoneInfo
 
 import pandas as pd
+import polars as pl
 import requests
 from tqdm import tqdm
 
@@ -16,8 +18,18 @@ input_folder = f"{data_folder}/input"
 scratch_folder = f"{data_folder}/scratch"
 output_folder = f"{data_folder}/output"
 
+import logging
+logging.basicConfig(
+    filename="processing.log",
+    encoding="utf-8",
+    filemode="a",
+    format="{asctime} - {levelname} - {message}",
+    style="{",
+    datefmt="%Y-%m-%d %H:%M",
+)
+
 if not os.path.exists(f"{data_folder}/processing.db"):
-    con = sqlite3.connect(f"{data_folder}/processing.db")
+    con = sqlite3.connect(f"{data_folder}/processing.db", timeout=60.0)
     cur = con.cursor()
     cur.executescript("""
         CREATE TABLE IF NOT EXISTS downloaded (
@@ -33,7 +45,7 @@ if not os.path.exists(f"{data_folder}/processing.db"):
     """)
     con.commit()
 else:
-    con = sqlite3.connect(f"{data_folder}/processing.db")
+    con = sqlite3.connect(f"{data_folder}/processing.db", timeout=60.0)
     cur = con.cursor()
 
 def setup():
@@ -223,14 +235,27 @@ def download_cube(product_id, language="en"):
                 progress_bar.update(len(chunk))
         progress_bar.close()
 
+def cleanup_product(product_id):
+    """
+    Remove the scratch files for a given productId
+    """
+    print(f"Removing scratch files for productId {product_id}")
+    os.remove(f"{scratch_folder}/{product_id}.csv")
+    os.remove(f"{scratch_folder}/{product_id}_MetaData.csv")
+
 def process_cube(product_id, language="en"):
     """
     Examples: 
     - productId 43100011 has all with DECIMAL = 1 (float64)
     - productId 17100009 has DECIMAL = 0 (int64)
     - productId 35100076 has multiple DECIMAL precisions [0, 1, 2] (int64, float64, float64)
-    - productId 10100164 has two columns named the same "Value" and "VALUE". It is processed fine with the read_csv, and when it is exported as parquet.
-    DuckDB has an issue with it (as it is case insensitive), but Pandas and Polars are able to handle "Value" and "VALUE"
+    - The duplicate column issue just happens with two column names in all data products ("Value", "VALUE", and "Status", "STATUS")
+        - productId 10100164 has two columns named the same "Value" and "VALUE". DuckDB treats column names in a case insensitve manner, so 
+        "Value" and "VALUE" are the same. So we will need to rename "Value" to "Value.1"
+        - productId 13100902 has two columns named the same "Status" and "STATUS". We will need to rename "Status" to "STATUS"
+    - productId 13100442 has 18 fields, but 19 fields were seen in line 162
+    - There are cases where the "DECIMALS" column does not exist in the CSV. productId 98100001 is one example.
+    In this case, we do let the .read_csv method guess the data types
     """
     cur.execute("SELECT product_id FROM downloaded WHERE product_id = ?", (product_id,))
     result = cur.fetchone()
@@ -253,13 +278,22 @@ def process_cube(product_id, language="en"):
     product_csv = f"{scratch_folder}/{product_id}.csv"
     print(f"Reading {product_csv}")
     parameters = {
+        "filepath_or_buffer": product_csv,
         "engine": "c",
-        "low_memory": True,
-        "nrows": 100000,
+        #"nrows": 100000,
         "dtype": {}
     }
     columns = pd.read_csv(product_csv, nrows=0).columns
-
+    
+    columns_to_rename = ['Value', 'Status']
+    for column in columns_to_rename:
+        if column in columns:
+            print(f"Renaming '{column}' to '{column}.1'")
+            columns = [f'{column}.1' if x == column else x for x in columns]
+            # Explicitly tell pandas to not read column names from CSV
+            parameters["header"] = 0
+            parameters["names"] = columns
+    
     columns_always_int_8 = ["DECIMALS", "SCALAR_ID"]
     for column in columns_always_int_8:
         if column in columns:
@@ -269,33 +303,56 @@ def process_cube(product_id, language="en"):
     for column in columns_always_int_16:
         if column in columns:
             parameters["dtype"][column] = 'int16'
+    
+    # REF_DATE, GEO, DGUID should always be string
+    columns_always_string = ["REF_DATE", "GEO", "DGUID"]
+    for column in columns_always_string:
+        if column in columns:
+            parameters["dtype"][column] = 'string'
 
     # The remaining columns should be string, with the exception of VALUE
-    for column in columns:
-        if column not in columns_always_int_8 and column not in columns_always_int_16 and column != "VALUE":
-            parameters["dtype"][column] = 'string'
+    # Added "DECIMAL" check as there can be numeric columns that are not the VALUE column
+    if "DECIMALS" in columns:
+        for column in columns:
+            if column not in columns_always_int_8 and column not in columns_always_int_16 and column != "VALUE":
+                parameters["dtype"][column] = 'string'
 
     if not parameters["dtype"]:
         del parameters["dtype"]
 
     print(f"Reading {product_csv} as a Pandas dataframe")
-    df = pd.read_csv(product_csv, **parameters)
-    unique_decimal_values = df["DECIMALS"].unique()
-    if any(unique_decimal_values):
-        """
-        A table can have both float and integer in the VALUE field. 
-        productId 11100025 is an example
-        So if we have unique values for DECIMALS to be [0,1], then we convert to float64
-        """
-        convert_dict = {"VALUE": "float64"}
-        print(convert_dict)
-        df = df.astype(convert_dict)
-    elif 0 in (unique_decimal_values):
-        if df["VALUE"].dtype != "Int64":
-            # If DECIMALS = [0]
-            convert_dict = {"VALUE": "Int64"}
-            print(convert_dict)
+    try:
+        df = pd.read_csv(**parameters)
+    except Exception:
+        logging.error(f"Failed to process productId: {product_id}")
+        cleanup_product(product_id)
+        return
+    
+    if "DECIMALS" in columns:
+        unique_decimal_values = df["DECIMALS"].unique()
+        #print(unique_decimal_values)
+        if any(unique_decimal_values):
+            """
+            A table can have both float and integer in the VALUE field. 
+            productId 11100025 is an example
+            So if we have unique values for DECIMALS to be [0,1], then we convert to float64
+            """
+            convert_dict = {"VALUE": "float64"}
+            #print(convert_dict)
             df = df.astype(convert_dict)
+        elif 0 in (unique_decimal_values):
+            if df["VALUE"].dtype != "Int64":
+                # If DECIMALS = [0]
+                convert_dict = {"VALUE": "Int64"}
+                #print(convert_dict)
+                df = df.astype(convert_dict)
+    else:
+        parameters = {
+            "convert_string": True,
+            "convert_boolean": False
+        }
+        #print("DECIMALS not in columns, using .convert_dtypes")
+        df = df.convert_dtypes(**parameters)
 
     df = convert_to_lowest_type(df)
     df = compute_ref_date_bounds(df)
@@ -309,10 +366,8 @@ def process_cube(product_id, language="en"):
         "compression_level": 22
     }
     df.to_parquet(**parameters)
-    # Remove the scratch files
-    print("Removing scratch files")
-    os.remove(f"{scratch_folder}/{product_id}.csv")
-    os.remove(f"{scratch_folder}/{product_id}_MetaData.csv")
+    # Remove scratch files
+    cleanup_product(product_id)
     update_last_downloaded(product_id)
     update_last_processed(product_id)
 
@@ -326,5 +381,5 @@ if __name__ == '__main__':
     print(f"Processing {to_process}")
     #for product_id in files_to_process:
     #    process_cube(product_id)
-    with Pool(processes=16) as p:
-        p.map(process_cube, files_to_process, chunksize=8)
+    with Pool(processes=2) as p:
+        p.map(process_cube, files_to_process, chunksize=1)
