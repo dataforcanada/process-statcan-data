@@ -35,6 +35,8 @@ RUN git clone https://github.com/felt/tippecanoe.git \
 # Install uv
 RUN curl -LsSf https://astral.sh/uv/install.sh | env UV_INSTALL_DIR="/usr/local/bin" sh
 
+USER ${USERNAME}
+
 # Create virtual environment and install Python packages
 RUN uv venv ~/.venv \
     && cd ~ \
@@ -43,24 +45,22 @@ RUN uv venv ~/.venv \
 # Bash Kernel
 RUN cd ~ \
     && uv pip install bash_kernel \
-	&& /root/.venv/bin/python -m bash_kernel.install
+	&& ~/.venv/bin/python -m bash_kernel.install
 
 # When user logs in, we use the spatial virtual environment
 RUN echo 'source /home/'${USERNAME}'/.venv/bin/activate' > ~/.bashrc \
     && echo 'export PATH="/home/'${USERNAME}'/.local/bin:${PATH}"' >> ~/.bashrc
 
-RUN mv /root/.venv /home/${USERNAME} \
-    && mv /root/.bashrc /home/${USERNAME} \
-    && chown ${USERNAME}:${USERNAME} -R /home/${USERNAME}/.venv \
-    && chown ${USERNAME}:${USERNAME} /home/${USERNAME}/.bashrc
+#RUN mv /root/.venv /home/${USERNAME} \
+#    && mv /root/.bashrc /home/${USERNAME} \
+#    && chown ${USERNAME}:${USERNAME} -R /home/${USERNAME}/.venv \
+#    && chown ${USERNAME}:${USERNAME} /home/${USERNAME}/.bashrc
 
-RUN mkdir /data
+RUN sudo mkdir /data
 
-RUN apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
+RUN sudo apt-get clean \
+    && sudo rm -rf /var/lib/apt/lists/* \
     && uv cache clean
-
-USER ubuntu
 
 # Install DuckDB
 RUN mkdir -p ~/.local/bin \
