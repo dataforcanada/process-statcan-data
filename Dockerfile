@@ -51,11 +51,6 @@ RUN cd ~ \
 RUN echo 'source /home/'${USERNAME}'/.venv/bin/activate' > ~/.bashrc \
     && echo 'export PATH="/home/'${USERNAME}'/.local/bin:${PATH}"' >> ~/.bashrc
 
-#RUN mv /root/.venv /home/${USERNAME} \
-#    && mv /root/.bashrc /home/${USERNAME} \
-#    && chown ${USERNAME}:${USERNAME} -R /home/${USERNAME}/.venv \
-#    && chown ${USERNAME}:${USERNAME} /home/${USERNAME}/.bashrc
-
 RUN sudo mkdir /data
 
 RUN sudo apt-get clean \
