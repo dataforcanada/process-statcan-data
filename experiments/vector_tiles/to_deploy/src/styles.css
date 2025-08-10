@@ -1,0 +1,256 @@
+@import 'maplibre-gl/dist/maplibre-gl.css';
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+html,
+body,
+#map {
+    height: 100%;
+}
+
+.search-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.search-results {
+    max-height: 200px;
+    overflow-y: auto;
+    border-top: 1px solid #eee;
+    display: none;
+}
+
+.search-item {
+    padding: 10px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #f5f5f5;
+    font-size: 13px;
+}
+
+.search-item:hover {
+    background-color: #f0f0f0;
+}
+
+.search-item:last-child {
+    border-bottom: none;
+}
+
+.recalculate-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    z-index: 1000;
+    background: #007cbf;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.recalculate-btn:hover {
+    background: #005a87;
+}
+
+.current-field {
+    position: absolute;
+    top: 70px;
+    right: 10px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #333;
+    max-width: 300px;
+    word-break: break-word;
+}
+
+.legend {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 12px;
+    min-width: 120px;
+}
+
+.legend-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    border: 1px solid #ccc;
+}
+
+.classification-info {
+    position: absolute;
+    bottom: 50px;
+    left: 10px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    color: #666;
+    max-width: 200px;
+}
+
+/* Pelias Geocoder Styles - Adapted for MapLibre */
+.pelias-ctrl {
+    position: relative;
+    display: inline-block;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, .1);
+    min-width: 200px;
+    max-width: 360px;
+}
+
+.pelias-ctrl-input {
+    width: 100%;
+    border: 0;
+    font-size: 12px;
+    line-height: 1.67;
+    padding: 8px 32px 8px 8px;
+    text-overflow: ellipsis;
+    background: transparent;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.pelias-ctrl-input::-webkit-input-placeholder {
+    color: #9b9b9b;
+}
+
+.pelias-ctrl-input::-moz-placeholder {
+    color: #9b9b9b;
+}
+
+.pelias-ctrl-input:-ms-input-placeholder {
+    color: #9b9b9b;
+}
+
+.pelias-ctrl-input:-moz-placeholder {
+    color: #9b9b9b;
+}
+
+.pelias-ctrl-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-top: 1px solid #eee;
+    border-radius: 0 0 3px 3px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, .1);
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+}
+
+.pelias-ctrl-results.active {
+    display: block;
+}
+
+.pelias-ctrl-result {
+    padding: 8px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.pelias-ctrl-result:last-child {
+    border-bottom: none;
+}
+
+.pelias-ctrl-result:hover,
+.pelias-ctrl-result.active {
+    background: #f8f8f8;
+}
+
+.pelias-ctrl-result-name {
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.pelias-ctrl-result-address {
+    color: #666;
+}
+
+.pelias-ctrl-clear {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #999;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: none;
+}
+
+.pelias-ctrl-clear:hover {
+    color: #333;
+}
+
+.pelias-ctrl-clear.active {
+    display: block;
+}
+
+.pelias-ctrl-error {
+    padding: 8px;
+    color: #d00;
+    font-size: 11px;
+    border-top: 1px solid #eee;
+}
+
+/* MapLibre Control positioning */
+.maplibregl-ctrl-top-right .pelias-ctrl {
+    margin: 10px 10px 0 0;
+}
+
+.maplibregl-ctrl-top-left .pelias-ctrl {
+    margin: 10px 0 0 10px;
+}
