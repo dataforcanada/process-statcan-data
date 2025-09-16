@@ -16,13 +16,13 @@ services:
     command: sleep infinity
   db:
     image: postgis/postgis:17-3.5-alpine
-    container_name: db
+    container_name: devcontainer_postgres
     restart: unless-stopped
     volumes:
       - pgdata:/var/lib/postgresql/data
     env_file: .env
     ports:
-      - 5432:5432
+      - 5435:5432
 
 networks:
   default:

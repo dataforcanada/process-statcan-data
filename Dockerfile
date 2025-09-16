@@ -1,4 +1,4 @@
-FROM ghcr.io/osgeo/gdal:ubuntu-full-3.11.0
+FROM ghcr.io/osgeo/gdal:ubuntu-full-3.11.4
 
 # Ubuntu is UID 1000 and GID 1000
 ARG USERNAME=ubuntu
@@ -40,7 +40,7 @@ USER ${USERNAME}
 # Create virtual environment and install Python packages
 RUN uv venv ~/.venv \
     && cd ~ \
-    && uv pip install 'geopandas[all]' duckdb psycopg2-binary jupyterlab lonboard click stats-can openpyxl ordered-set buckaroo jenkspy 'polars[all]'
+    && uv pip install 'geopandas[all]' duckdb psycopg2-binary jupyterlab lonboard click stats-can openpyxl ordered-set buckaroo jenkspy 'polars[all]' folium-pmtiles
 
 # Bash Kernel
 RUN cd ~ \

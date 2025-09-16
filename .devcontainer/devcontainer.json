@@ -6,8 +6,8 @@
   "containerUser": "ubuntu",
   "shutdownAction": "stopCompose",
   "forwardPorts": [
-    5432,
-    8888
+    8888,
+    5435
   ],
   "customizations": {
     "vscode": {
