@@ -27,7 +27,7 @@ RUN apt-get install -y neovim \
 # tippecanoe
 RUN git clone https://github.com/felt/tippecanoe.git \
     && cd tippecanoe \
-    && git checkout 2.78.0 \
+    && git checkout 2.79.0 \
     && make -j \
     && make install \
     && rm /home/jovyan/tippecanoe -rf
